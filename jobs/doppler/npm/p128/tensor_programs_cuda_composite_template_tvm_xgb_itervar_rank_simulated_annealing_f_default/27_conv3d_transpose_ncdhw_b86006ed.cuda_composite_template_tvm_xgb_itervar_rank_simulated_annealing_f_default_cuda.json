@@ -1,0 +1,265 @@
+{
+    "job_name_prefix": "27_conv3d_transpose_ncdhw_b86006ed.cuda_composite_template_tvm_xgb_itervar_rank_simulated_annealing_f_default_cuda",
+    "metadata": {
+        "platform": "intelv100",
+        "autotuner": "autotvm",
+        "approach": "npm",
+        "model": null,
+        "dop": 2,
+        "run_idx": 0
+    },
+    "inputs": [
+        {
+            "name": "sh_27",
+            "type": "tensor_program",
+            "identifier": "conv3d_transpose_ncdhw_b86006ed.cuda"
+        }
+    ],
+    "specifications": [
+        {
+            "name": "orchestrator_default_spec",
+            "type": "orchestrator",
+            "spec": {
+                "measurer": "default",
+                "builder": "parallel",
+                "runner": "local",
+                "evaluator": "default"
+            },
+            "settings": {
+                "num_trials": 500,
+                "batch_size": 64,
+                "early_stop": null
+            }
+        },
+        {
+            "name": "meth_composite_template_tvm_xgb_itervar_rank_simulated_annealing_f_default",
+            "type": "method",
+            "spec": {
+                "scheduling": "template",
+                "kind": "composite",
+                "method_name": null,
+                "cost_model": "tvm_xgb_itervar_rank",
+                "optimizer": "simulated_annealing",
+                "search_policy": null,
+                "sampler": null,
+                "filter": "default"
+            },
+            "settings": {}
+        },
+        {
+            "name": "test_input_method_map",
+            "type": "input_method_map",
+            "spec": {
+                "strategy": "sequential",
+                "group_type": "tensor_program",
+                "maps": [
+                    {
+                        "input": "sh_27",
+                        "output": "t_sh_27",
+                        "method": "meth_composite_template_tvm_xgb_itervar_rank_simulated_annealing_f_default"
+                    }
+                ]
+            }
+        }
+    ],
+    "task": {
+        "name": "test_task",
+        "type": "orchestrator:default",
+        "inputs": [
+            "sh_27"
+        ],
+        "outputs": [
+            "t_sh_27"
+        ],
+        "specifications": [
+            "orchestrator_default_spec",
+            "meth_composite_template_tvm_xgb_itervar_rank_simulated_annealing_f_default",
+            "test_input_method_map"
+        ],
+        "configurations": [
+            "orchestrator:default.1",
+            "measurer:default.1",
+            "builder:parallel.1",
+            "runner:local.1",
+            "evaluator:default.1",
+            "method:template:composite.1",
+            "cost_model:tvm_xgb_itervar_rank.1",
+            "optimizer:simulated_annealing.1",
+            "filter:default.1",
+            "strategy:sequential.1",
+            "time_profiler.1",
+            "time_profiler.2",
+            "time_profiler.3",
+            "time_profiler.4",
+            "system_monitor.1"
+        ],
+        "profilers": [
+            {
+                "type": "time_profiler",
+                "scope": "strategy",
+                "configuration": "time_profiler.1",
+                "collection": "strategy_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "method",
+                "configuration": "time_profiler.2",
+                "collection": "method_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "builder",
+                "configuration": "time_profiler.3",
+                "collection": "compilations"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "runner",
+                "configuration": "time_profiler.4",
+                "collection": "measurements"
+            },
+            {
+                "type": "system_monitor",
+                "scope": "strategy",
+                "configuration": "system_monitor.1",
+                "collection": "sysmons"
+            }
+        ]
+    },
+    "configurations": [
+        {
+            "entity": "orchestrator:default",
+            "name": "orchestrator:default.1",
+            "configuration": {}
+        },
+        {
+            "entity": "measurer:default",
+            "name": "measurer:default.1",
+            "configuration": {
+                "target": "cuda",
+                "target_host": "llvm",
+                "devices": [
+                    "localmachine:v100.0"
+                ],
+                "nvidia_mps_devices": []
+            }
+        },
+        {
+            "entity": "builder:parallel",
+            "name": "builder:parallel.1",
+            "configuration": {
+                "timeout": 30,
+                "n_parallel": null
+            }
+        },
+        {
+            "entity": "runner:local",
+            "name": "runner:local.1",
+            "configuration": {
+                "cooldown_interval": 0.1,
+                "timeout": 3,
+                "n_parallel": 128
+            }
+        },
+        {
+            "entity": "evaluator:default",
+            "name": "evaluator:default.1",
+            "configuration": {
+                "num_avg_runs": 20,
+                "num_measure_repeat": 3,
+                "min_repeat_ms": 100,
+                "enable_cpu_cache_flush": false
+            }
+        },
+        {
+            "entity": "method:template:composite",
+            "name": "method:template:composite.1",
+            "configuration": {
+                "plan_size": 64
+            }
+        },
+        {
+            "entity": "cost_model:tvm_xgb_itervar_rank",
+            "name": "cost_model:tvm_xgb_itervar_rank.1",
+            "configuration": {
+                "num_threads": null,
+                "log_interval": 25
+            }
+        },
+        {
+            "entity": "optimizer:simulated_annealing",
+            "name": "optimizer:simulated_annealing.1",
+            "configuration": {
+                "temp": [
+                    1,
+                    0
+                ],
+                "early_stop": 50,
+                "persistent": true,
+                "log_interval": 50
+            }
+        },
+        {
+            "entity": "filter:default",
+            "name": "filter:default.1",
+            "configuration": {
+                "balanced_epsilon": 0.05
+            }
+        },
+        {
+            "entity": "strategy:sequential",
+            "name": "strategy:sequential.1",
+            "configuration": {}
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.1",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.2",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.3",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.4",
+            "configuration": null
+        },
+        {
+            "entity": "system_monitor",
+            "name": "system_monitor.1",
+            "configuration": {
+                "gpus": [
+                    0
+                ],
+                "poll_interval": 1,
+                "metrics": {
+                    "host_cpu_freq": true,
+                    "host_cpu_util_user": true,
+                    "host_cpu_util_nice": true,
+                    "host_cpu_util_system": true,
+                    "host_cpu_util_idle": true,
+                    "host_cpu_util_iowait": true,
+                    "host_cpu_util_irq": true,
+                    "host_cpu_util_softirq": true,
+                    "host_cpu_util_perc": true,
+                    "host_mem_prc": true,
+                    "gpu_mem_free": true,
+                    "gpu_mem_used": true,
+                    "gpu_mem_total": true,
+                    "gpu_util": true,
+                    "gpu_mem_util": true,
+                    "gpu_power": true,
+                    "gpu_clock_sm": true,
+                    "gpu_clock_mem": true
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+.vscode
+.pkl_memoize_py3
+log
+nohup.out
+conductorvenv
+*.pyc
+data/results/*
+data/*
+!data/results/.keep
+!data/.keep
+NOTES.md

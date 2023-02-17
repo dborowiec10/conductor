@@ -1,0 +1,26 @@
+{
+    "llvm": [
+        {"name": "cm_0", "type": "model", "model_name": "alexnet", "model_framework": "pytorch", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "dcgan", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "mobilenet_v1_1_00", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "resnet18_v1", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "resnet3d_18", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "yolov3", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "vgg16", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "vgg19", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "mobilenet_v2_1_00", "model_framework": "pytorch", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "squeezenet1_1", "model_framework": "tvm", "batch_size": 1}
+    ],
+    "cuda": [
+        {"name": "cm_0", "type": "model", "model_name": "alexnet", "model_framework": "pytorch", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "dcgan", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "mobilenet_v1_1_00", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "resnet18_v1", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "resnet3d_18", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "yolov3", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "vgg16", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "vgg19", "model_framework": "tvm", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "mobilenet_v2_1_00", "model_framework": "pytorch", "batch_size": 1},
+        {"name": "cm_0", "type": "model", "model_name": "squeezenet1_1", "model_framework": "tvm", "batch_size": 1}
+    ]
+}

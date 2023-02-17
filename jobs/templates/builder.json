@@ -1,0 +1,9 @@
+{
+    "serial": {
+        "timeout": 3
+    },
+    "parallel": {
+        "timeout": 30,
+        "n_parallel": null
+    }
+}

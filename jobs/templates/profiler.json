@@ -1,0 +1,30 @@
+{
+    "time_profiler": null,
+    "powercap_profiler": {
+        "poll_interval": 0.5
+    },
+    "system_monitor": {
+        "gpus": [0],
+        "poll_interval": 1,
+        "metrics": {
+            "host_cpu_freq": true,
+            "host_cpu_util_user": true,
+            "host_cpu_util_nice": true,
+            "host_cpu_util_system": true,
+            "host_cpu_util_idle": true,
+            "host_cpu_util_iowait": true,
+            "host_cpu_util_irq": true,
+            "host_cpu_util_softirq": true,
+            "host_cpu_util_perc": true,
+            "host_mem_prc": true,
+            "gpu_mem_free": true,
+            "gpu_mem_used": true,
+            "gpu_mem_total": true,
+            "gpu_util": true,
+            "gpu_mem_util": true,
+            "gpu_power": true,
+            "gpu_clock_sm": true,
+            "gpu_clock_mem": true
+        }
+    }
+}

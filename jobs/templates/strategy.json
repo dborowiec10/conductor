@@ -1,0 +1,17 @@
+{
+    "gradient": {
+        "alpha": 0.2,
+        "beta": 2,
+        "backward_window_size": 3,
+        "num_warmup_sample": 5,
+        "objective_func": "weighted_sum"
+    },
+    "sequential": {},
+    "trimmer": {
+        "op_plateau_threshold": 2,
+        "mod_plateau_threshold": 2,
+        "window": 2
+    },
+    "round_robin": {},
+    "one_shot": {}
+}

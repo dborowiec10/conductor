@@ -1,0 +1,7 @@
+{
+    "template": {
+        "adaptive": {
+            "sample_cnt_step": 8
+        }
+    }
+}

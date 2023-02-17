@@ -1,0 +1,53 @@
+{
+    "template": {
+        "standalone": {
+            "grid_index": null,
+            "random_index": null,
+            "genetic": {
+                "pop_size": 100,
+                "elite_num": 3,
+                "mutation_prob": 0.1
+            }
+        },
+        "composite": {
+            "plan_size": 64
+        }
+    },
+    "sketch": {
+        "composite": null
+    },
+    "flex": {
+        "standalone": {
+            "qflex": {
+                "slevel": 4,
+                "rlevel": 3,
+                "force_inline": false,
+                "rewrite": false,
+                "op_graph_trial_split": [0.8, 0.2],
+                "op_graph_early_stop": [15, 5],
+                "op_trials": 10,
+                "graph_trials": 2
+            },
+            "pflex": {
+                "slevel": 4,
+                "rlevel": 3,
+                "force_inline": false,
+                "rewrite": false,
+                "op_graph_trial_split": [0.8, 0.2],
+                "op_graph_early_stop": [15, 5],
+                "op_trials": 10,
+                "graph_trials": 2
+            },
+            "rndflex": {
+                "slevel": 4,
+                "rlevel": 3,
+                "force_inline": false,
+                "rewrite": false,
+                "op_graph_trial_split": [0.8, 0.2],
+                "op_graph_early_stop": [15, 5],
+                "op_trials": 10,
+                "graph_trials": 2
+            }
+        }
+    }
+}

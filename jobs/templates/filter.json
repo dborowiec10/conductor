@@ -1,0 +1,14 @@
+{
+    "template": {
+        "default": {
+            "balanced_epsilon": 0.05
+        },
+        "diversity_aware": {
+            "balanced_epsilon": 0.05,
+            "ratio": null
+        },
+        "context_aware": {
+            "balanced_epsilon": 0.05
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "template": {
+        "simulated_annealing": {
+            "temp": [1, 0],
+            "early_stop": 50,
+            "persistent": true,
+            "log_interval": 50
+        },
+        "reinforcement_learning": {
+            "temp": [1, 0],
+            "early_stop": 50,
+            "persistent": true,
+            "log_interval": 50
+        }
+    }
+}

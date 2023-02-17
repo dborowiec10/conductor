@@ -1,0 +1,54 @@
+{
+    "template": {
+        "tvm_xgb_itervar_rank": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "tvm_xgb_itervar_reg": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "tvm_xgb_knob_rank": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "tvm_xgb_knob_reg": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "tvm_xgb_curve_rank": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "tvm_xgb_curve_reg": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "adatune_rf_itervar": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "adatune_rf_knob": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "adatune_rf_simpleknob": {
+            "num_threads": null,
+            "log_interval": 25
+        },
+        "adatune_rf_curve": {
+            "num_threads": null,
+            "log_interval": 25
+        }
+    },
+    "sketch": {
+        "ansor_xgb": {
+            "model_file": null,
+            "log_file": null,
+            "adaptive_training": false,
+            "seed": null,
+            "verbose_eval": 25
+        },
+        "ansor_rnd": {}
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "local": {
+        "cooldown_interval": 0.1,
+        "timeout": 3,
+        "n_parallel": 1
+    },
+    "remote_doppler": {
+        "cooldown_interval": 0.1,
+        "timeout": 3,
+        "n_parallel": 1,
+        "rpc_host": "0.0.0.0",
+        "rpc_port": 9000,
+        "client_host": "0.0.0.0",
+        "client_port": 10000
+    },
+    "remote_tvm": {
+        "cooldown_interval": 0.1,
+        "timeout": 3,
+        "n_parallel": 1,
+        "rpc_host": "0.0.0.0",
+        "rpc_port": 9000,
+        "rpc_port_end": 9199
+    }
+}

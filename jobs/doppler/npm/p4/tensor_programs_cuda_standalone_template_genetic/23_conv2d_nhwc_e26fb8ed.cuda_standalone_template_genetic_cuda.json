@@ -1,0 +1,236 @@
+{
+    "job_name_prefix": "23_conv2d_nhwc_e26fb8ed.cuda_standalone_template_genetic_cuda",
+    "metadata": {
+        "platform": "intelv100",
+        "autotuner": "genetic",
+        "approach": "npm",
+        "model": null,
+        "dop": 2,
+        "run_idx": 0
+    },
+    "inputs": [
+        {
+            "name": "sh_23",
+            "type": "tensor_program",
+            "identifier": "conv2d_nhwc_e26fb8ed.cuda"
+        }
+    ],
+    "specifications": [
+        {
+            "name": "orchestrator_default_spec",
+            "type": "orchestrator",
+            "spec": {
+                "measurer": "default",
+                "builder": "parallel",
+                "runner": "local",
+                "evaluator": "default"
+            },
+            "settings": {
+                "num_trials": 500,
+                "batch_size": 64,
+                "early_stop": null
+            }
+        },
+        {
+            "name": "meth_standalone_template_genetic",
+            "type": "method",
+            "spec": {
+                "scheduling": "template",
+                "kind": "standalone",
+                "method_name": "genetic",
+                "cost_model": null,
+                "optimizer": null,
+                "search_policy": null,
+                "sampler": null,
+                "filter": null
+            },
+            "settings": {}
+        },
+        {
+            "name": "test_input_method_map",
+            "type": "input_method_map",
+            "spec": {
+                "strategy": "sequential",
+                "group_type": "tensor_program",
+                "maps": [
+                    {
+                        "input": "sh_23",
+                        "output": "t_sh_23",
+                        "method": "meth_standalone_template_genetic"
+                    }
+                ]
+            }
+        }
+    ],
+    "task": {
+        "name": "test_task",
+        "type": "orchestrator:default",
+        "inputs": [
+            "sh_23"
+        ],
+        "outputs": [
+            "t_sh_23"
+        ],
+        "specifications": [
+            "orchestrator_default_spec",
+            "meth_standalone_template_genetic",
+            "test_input_method_map"
+        ],
+        "configurations": [
+            "orchestrator:default.1",
+            "measurer:default.1",
+            "builder:parallel.1",
+            "runner:local.1",
+            "evaluator:default.1",
+            "method:template:standalone:genetic.1",
+            "strategy:sequential.1",
+            "time_profiler.1",
+            "time_profiler.2",
+            "time_profiler.3",
+            "time_profiler.4",
+            "system_monitor.1"
+        ],
+        "profilers": [
+            {
+                "type": "time_profiler",
+                "scope": "strategy",
+                "configuration": "time_profiler.1",
+                "collection": "strategy_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "method",
+                "configuration": "time_profiler.2",
+                "collection": "method_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "builder",
+                "configuration": "time_profiler.3",
+                "collection": "compilations"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "runner",
+                "configuration": "time_profiler.4",
+                "collection": "measurements"
+            },
+            {
+                "type": "system_monitor",
+                "scope": "strategy",
+                "configuration": "system_monitor.1",
+                "collection": "sysmons"
+            }
+        ]
+    },
+    "configurations": [
+        {
+            "entity": "orchestrator:default",
+            "name": "orchestrator:default.1",
+            "configuration": {}
+        },
+        {
+            "entity": "measurer:default",
+            "name": "measurer:default.1",
+            "configuration": {
+                "target": "cuda",
+                "target_host": "llvm",
+                "devices": [
+                    "localmachine:v100.0"
+                ],
+                "nvidia_mps_devices": []
+            }
+        },
+        {
+            "entity": "builder:parallel",
+            "name": "builder:parallel.1",
+            "configuration": {
+                "timeout": 30,
+                "n_parallel": null
+            }
+        },
+        {
+            "entity": "runner:local",
+            "name": "runner:local.1",
+            "configuration": {
+                "cooldown_interval": 0.1,
+                "timeout": 3,
+                "n_parallel": 4
+            }
+        },
+        {
+            "entity": "evaluator:default",
+            "name": "evaluator:default.1",
+            "configuration": {
+                "num_avg_runs": 20,
+                "num_measure_repeat": 3,
+                "min_repeat_ms": 100,
+                "enable_cpu_cache_flush": false
+            }
+        },
+        {
+            "entity": "method:template:standalone:genetic",
+            "name": "method:template:standalone:genetic.1",
+            "configuration": {
+                "pop_size": 100,
+                "elite_num": 3,
+                "mutation_prob": 0.1
+            }
+        },
+        {
+            "entity": "strategy:sequential",
+            "name": "strategy:sequential.1",
+            "configuration": {}
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.1",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.2",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.3",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.4",
+            "configuration": null
+        },
+        {
+            "entity": "system_monitor",
+            "name": "system_monitor.1",
+            "configuration": {
+                "gpus": [
+                    0
+                ],
+                "poll_interval": 1,
+                "metrics": {
+                    "host_cpu_freq": true,
+                    "host_cpu_util_user": true,
+                    "host_cpu_util_nice": true,
+                    "host_cpu_util_system": true,
+                    "host_cpu_util_idle": true,
+                    "host_cpu_util_iowait": true,
+                    "host_cpu_util_irq": true,
+                    "host_cpu_util_softirq": true,
+                    "host_cpu_util_perc": true,
+                    "host_mem_prc": true,
+                    "gpu_mem_free": true,
+                    "gpu_mem_used": true,
+                    "gpu_mem_total": true,
+                    "gpu_util": true,
+                    "gpu_mem_util": true,
+                    "gpu_power": true,
+                    "gpu_clock_sm": true,
+                    "gpu_clock_mem": true
+                }
+            }
+        }
+    ]
+}

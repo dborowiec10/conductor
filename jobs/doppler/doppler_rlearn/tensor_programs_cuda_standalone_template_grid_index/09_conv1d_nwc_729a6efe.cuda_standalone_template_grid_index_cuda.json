@@ -1,0 +1,256 @@
+{
+    "job_name_prefix": "09_conv1d_nwc_729a6efe.cuda_standalone_template_grid_index_cuda",
+    "metadata": {
+        "platform": "intelv100",
+        "autotuner": "grid_index",
+        "approach": "doppler_rlearn",
+        "model": null,
+        "dop": "doppler",
+        "run_idx": 0
+    },
+    "inputs": [
+        {
+            "name": "sh_9",
+            "type": "tensor_program",
+            "identifier": "conv1d_nwc_729a6efe.cuda"
+        }
+    ],
+    "specifications": [
+        {
+            "name": "orchestrator_default_spec",
+            "type": "orchestrator",
+            "spec": {
+                "measurer": "doppler_rlearn",
+                "builder": "parallel",
+                "runner": "local",
+                "evaluator": "activity"
+            },
+            "settings": {
+                "num_trials": 500,
+                "batch_size": 64,
+                "early_stop": null
+            }
+        },
+        {
+            "name": "meth_standalone_template_grid_index",
+            "type": "method",
+            "spec": {
+                "scheduling": "template",
+                "kind": "standalone",
+                "method_name": "grid_index",
+                "cost_model": null,
+                "optimizer": null,
+                "search_policy": null,
+                "sampler": null,
+                "filter": null
+            },
+            "settings": {}
+        },
+        {
+            "name": "test_input_method_map",
+            "type": "input_method_map",
+            "spec": {
+                "strategy": "sequential",
+                "group_type": "tensor_program",
+                "maps": [
+                    {
+                        "input": "sh_9",
+                        "output": "t_sh_9",
+                        "method": "meth_standalone_template_grid_index"
+                    }
+                ]
+            }
+        }
+    ],
+    "task": {
+        "name": "test_task",
+        "type": "orchestrator:default",
+        "inputs": [
+            "sh_9"
+        ],
+        "outputs": [
+            "t_sh_9"
+        ],
+        "specifications": [
+            "orchestrator_default_spec",
+            "meth_standalone_template_grid_index",
+            "test_input_method_map"
+        ],
+        "configurations": [
+            "orchestrator:default.1",
+            "measurer:doppler_rlearn.1",
+            "builder:parallel.1",
+            "runner:local.1",
+            "evaluator:activity.1",
+            "method:template:standalone:grid_index.1",
+            "strategy:sequential.1",
+            "time_profiler.1",
+            "time_profiler.2",
+            "time_profiler.3",
+            "time_profiler.4",
+            "system_monitor.1"
+        ],
+        "profilers": [
+            {
+                "type": "time_profiler",
+                "scope": "strategy",
+                "configuration": "time_profiler.1",
+                "collection": "strategy_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "method",
+                "configuration": "time_profiler.2",
+                "collection": "method_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "builder",
+                "configuration": "time_profiler.3",
+                "collection": "compilations"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "runner",
+                "configuration": "time_profiler.4",
+                "collection": "measurements"
+            },
+            {
+                "type": "system_monitor",
+                "scope": "strategy",
+                "configuration": "system_monitor.1",
+                "collection": "sysmons"
+            }
+        ]
+    },
+    "configurations": [
+        {
+            "entity": "orchestrator:default",
+            "name": "orchestrator:default.1",
+            "configuration": {}
+        },
+        {
+            "entity": "measurer:doppler_rlearn",
+            "name": "measurer:doppler_rlearn.1",
+            "configuration": {
+                "target": "cuda",
+                "target_host": "llvm",
+                "devices": [
+                    "localmachine:v100.0"
+                ],
+                "nvidia_mps_devices": [],
+                "timeout_k": 20,
+                "timeout_z": 4.5,
+                "timeout_s": 0.06,
+                "double_mad_zscore_constant": 0.6745,
+                "double_mad_zscore_threshold": 3,
+                "fixed_samples": false,
+                "fixed_sample_count": 0,
+                "rank_remeasure_perc": 0.01,
+                "rank_remeasure_timeout": 2,
+                "perc_remeasure_samples": 0.2,
+                "error_to_reset": 0.75,
+                "fixed_timeout": false,
+                "max_dop": 128,
+                "observations": 4,
+                "entropy_coef": 0.3,
+                "value_coeff": 1.0,
+                "value_clip": 0.2,
+                "gamma": 0.9,
+                "lambda": 0.99,
+                "epochs": 3,
+                "batch_size": 8,
+                "delta_threshold": 0.05,
+                "failed_threshold": 0.05,
+                "failed_due_to_dop_threshold": 0.25
+            }
+        },
+        {
+            "entity": "builder:parallel",
+            "name": "builder:parallel.1",
+            "configuration": {
+                "timeout": 30,
+                "n_parallel": null
+            }
+        },
+        {
+            "entity": "runner:local",
+            "name": "runner:local.1",
+            "configuration": {
+                "cooldown_interval": 0.1,
+                "timeout": 3,
+                "n_parallel": 64
+            }
+        },
+        {
+            "entity": "evaluator:activity",
+            "name": "evaluator:activity.1",
+            "configuration": {
+                "num_avg_runs": 20,
+                "num_measure_repeat": 3,
+                "min_repeat_ms": 100,
+                "enable_cpu_cache_flush": false
+            }
+        },
+        {
+            "entity": "method:template:standalone:grid_index",
+            "name": "method:template:standalone:grid_index.1",
+            "configuration": null
+        },
+        {
+            "entity": "strategy:sequential",
+            "name": "strategy:sequential.1",
+            "configuration": {}
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.1",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.2",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.3",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.4",
+            "configuration": null
+        },
+        {
+            "entity": "system_monitor",
+            "name": "system_monitor.1",
+            "configuration": {
+                "gpus": [
+                    0
+                ],
+                "poll_interval": 1,
+                "metrics": {
+                    "host_cpu_freq": true,
+                    "host_cpu_util_user": true,
+                    "host_cpu_util_nice": true,
+                    "host_cpu_util_system": true,
+                    "host_cpu_util_idle": true,
+                    "host_cpu_util_iowait": true,
+                    "host_cpu_util_irq": true,
+                    "host_cpu_util_softirq": true,
+                    "host_cpu_util_perc": true,
+                    "host_mem_prc": true,
+                    "gpu_mem_free": true,
+                    "gpu_mem_used": true,
+                    "gpu_mem_total": true,
+                    "gpu_util": true,
+                    "gpu_mem_util": true,
+                    "gpu_power": true,
+                    "gpu_clock_sm": true,
+                    "gpu_clock_mem": true
+                }
+            }
+        }
+    ]
+}

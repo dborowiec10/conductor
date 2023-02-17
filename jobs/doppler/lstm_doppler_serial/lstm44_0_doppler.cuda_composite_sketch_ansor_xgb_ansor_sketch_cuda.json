@@ -1,0 +1,292 @@
+{
+    "job_name_prefix": "lstm44_0.cuda_composite_sketch_ansor_xgb_ansor_sketch_cuda",
+    "metadata": {
+        "platform": "intelv100",
+        "autotuner": "ansor",
+        "approach": "doppler_bic",
+        "model": null,
+        "dop": "doppler",
+        "run_idx": 0
+    },
+    "inputs": [
+        {
+            "name": "sh_0",
+            "type": "tensor_program",
+            "identifier": "lstm44_0"
+        }
+    ],
+    "specifications": [
+        {
+            "name": "orchestrator_default_spec",
+            "type": "orchestrator",
+            "spec": {
+                "measurer": "doppler_bic",
+                "builder": "parallel",
+                "runner": "local",
+                "evaluator": "activity"
+            },
+            "settings": {
+                "num_trials": 500,
+                "batch_size": 64,
+                "early_stop": null
+            }
+        },
+        {
+            "name": "meth_composite_sketch_ansor_xgb_ansor_sketch",
+            "type": "method",
+            "spec": {
+                "scheduling": "sketch",
+                "kind": "composite",
+                "method_name": null,
+                "cost_model": "ansor_xgb",
+                "optimizer": null,
+                "search_policy": "ansor_sketch",
+                "sampler": null,
+                "filter": null
+            },
+            "settings": {}
+        },
+        {
+            "name": "test_input_method_map",
+            "type": "input_method_map",
+            "spec": {
+                "strategy": "gradient",
+                "group_type": "tensor_program",
+                "maps": [
+                    {
+                        "input": "sh_0",
+                        "output": "t_sh_0",
+                        "method": "meth_composite_sketch_ansor_xgb_ansor_sketch"
+                    }
+                ]
+            }
+        }
+    ],
+    "task": {
+        "name": "test_task",
+        "type": "orchestrator:default",
+        "inputs": [
+            "sh_0"
+        ],
+        "outputs": [
+            "t_sh_0"
+        ],
+        "specifications": [
+            "orchestrator_default_spec",
+            "meth_composite_sketch_ansor_xgb_ansor_sketch",
+            "test_input_method_map"
+        ],
+        "configurations": [
+            "orchestrator:default.1",
+            "measurer:doppler_bic.1",
+            "builder:parallel.1",
+            "runner:local.1",
+            "evaluator:activity.1",
+            "method:sketch:composite.1",
+            "cost_model:ansor_xgb.1",
+            "search_policy:ansor_sketch.1",
+            "strategy:gradient.1",
+            "time_profiler.1",
+            "time_profiler.2",
+            "time_profiler.3",
+            "time_profiler.4",
+            "system_monitor.1"
+        ],
+        "profilers": [
+            {
+                "type": "time_profiler",
+                "scope": "strategy",
+                "configuration": "time_profiler.1",
+                "collection": "strategy_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "method",
+                "configuration": "time_profiler.2",
+                "collection": "method_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "builder",
+                "configuration": "time_profiler.3",
+                "collection": "compilations"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "runner",
+                "configuration": "time_profiler.4",
+                "collection": "measurements"
+            },
+            {
+                "type": "system_monitor",
+                "scope": "strategy",
+                "configuration": "system_monitor.1",
+                "collection": "sysmons"
+            }
+        ]
+    },
+    "configurations": [
+        {
+            "entity": "orchestrator:default",
+            "name": "orchestrator:default.1",
+            "configuration": {}
+        },
+        {
+            "entity": "measurer:doppler_bic",
+            "name": "measurer:doppler_bic.1",
+            "configuration": {
+                "target": "cuda",
+                "target_host": "llvm",
+                "devices": [
+                    "localmachine:v100.0"
+                ],
+                "nvidia_mps_devices": [],
+                "timeout_k": 20,
+                "timeout_z": 4.5,
+                "timeout_s": 0.06,
+                "double_mad_zscore_constant": 0.6745,
+                "double_mad_zscore_threshold": 3,
+                "fixed_samples": false,
+                "fixed_sample_count": 0,
+                "rank_remeasure_perc": 0.01,
+                "rank_remeasure_timeout": 2,
+                "perc_remeasure_samples": 0.2,
+                "error_to_reset": 0.75,
+                "fixed_timeout": false,
+                "delta_threshold": 0.05,
+                "failed_threshold": 0.05,
+                "window_deltas": 2,
+                "window_perc_good": 2,
+                "window_times": 2,
+                "adaptive_max_dop": 128,
+                "beta": 0.2,
+                "min_increment": 2,
+                "max_increment": 12
+            }
+        },
+        {
+            "entity": "builder:parallel",
+            "name": "builder:parallel.1",
+            "configuration": {
+                "timeout": 30,
+                "n_parallel": null
+            }
+        },
+        {
+            "entity": "runner:local",
+            "name": "runner:local.1",
+            "configuration": {
+                "cooldown_interval": 0.1,
+                "timeout": 3,
+                "n_parallel": 64
+            }
+        },
+        {
+            "entity": "evaluator:activity",
+            "name": "evaluator:activity.1",
+            "configuration": {
+                "num_avg_runs": 20,
+                "num_measure_repeat": 3,
+                "min_repeat_ms": 100,
+                "enable_cpu_cache_flush": false
+            }
+        },
+        {
+            "entity": "method:sketch:composite",
+            "name": "method:sketch:composite.1",
+            "configuration": null
+        },
+        {
+            "entity": "cost_model:ansor_xgb",
+            "name": "cost_model:ansor_xgb.1",
+            "configuration": {
+                "model_file": null,
+                "log_file": null,
+                "adaptive_training": false,
+                "seed": null,
+                "verbose_eval": 25
+            }
+        },
+        {
+            "entity": "search_policy:ansor_sketch",
+            "name": "search_policy:ansor_sketch.1",
+            "configuration": {
+                "eps_greedy": 0.05,
+                "retry_search_one_round_on_empty": 1,
+                "sample_init_min_population": 50,
+                "sample_init_use_measured_ratio": 0.2,
+                "evolutionary_search_population": 2048,
+                "evolutionary_search_num_iters": 4,
+                "evolutionary_search_mutation_prob": 0.85,
+                "cpu_multi_level_tiling_structure": "SSRSRS",
+                "gpu_multi_level_tiling_structure": "SSSRRSRS",
+                "max_innermost_split_factor": 64,
+                "max_vectorize_size": 16,
+                "disable_change_compute_location": 0,
+                "seed": null,
+                "verbose": 0
+            }
+        },
+        {
+            "entity": "strategy:gradient",
+            "name": "strategy:gradient.1",
+            "configuration": {
+                "alpha": 0.2,
+                "beta": 2,
+                "backward_window_size": 3,
+                "num_warmup_sample": 5,
+                "objective_func": "weighted_sum"
+            }
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.1",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.2",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.3",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.4",
+            "configuration": null
+        },
+        {
+            "entity": "system_monitor",
+            "name": "system_monitor.1",
+            "configuration": {
+                "gpus": [
+                    0
+                ],
+                "poll_interval": 1,
+                "metrics": {
+                    "host_cpu_freq": true,
+                    "host_cpu_util_user": true,
+                    "host_cpu_util_nice": true,
+                    "host_cpu_util_system": true,
+                    "host_cpu_util_idle": true,
+                    "host_cpu_util_iowait": true,
+                    "host_cpu_util_irq": true,
+                    "host_cpu_util_softirq": true,
+                    "host_cpu_util_perc": true,
+                    "host_mem_prc": true,
+                    "gpu_mem_free": true,
+                    "gpu_mem_used": true,
+                    "gpu_mem_total": true,
+                    "gpu_util": true,
+                    "gpu_mem_util": true,
+                    "gpu_power": true,
+                    "gpu_clock_sm": true,
+                    "gpu_clock_mem": true
+                }
+            }
+        }
+    ]
+}

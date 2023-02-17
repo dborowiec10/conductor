@@ -1,0 +1,3 @@
+[submodule "tvm-conductor"]
+	path = tvm-conductor
+	url = https://github.com/dborowiec10/tvm-conductor.git

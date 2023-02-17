@@ -1,0 +1,238 @@
+{
+    "job_name_prefix": "29_conv3d_ncdhw_59c7a972.cuda_standalone_template_grid_index_cuda",
+    "metadata": {
+        "platform": "intelv100",
+        "autotuner": "grid_index",
+        "approach": "serial_mutli_gpu_rpc_local",
+        "model": null,
+        "dop": "serial",
+        "run_idx": 0,
+        "gpus": "4",
+        "devices": "4"
+    },
+    "inputs": [
+        {
+            "name": "sh_29",
+            "type": "tensor_program",
+            "identifier": "conv3d_ncdhw_59c7a972.cuda"
+        }
+    ],
+    "specifications": [
+        {
+            "name": "orchestrator_default_spec",
+            "type": "orchestrator",
+            "spec": {
+                "measurer": "default",
+                "builder": "parallel",
+                "runner": "remote_tvm",
+                "evaluator": "default"
+            },
+            "settings": {
+                "num_trials": 500,
+                "batch_size": 64,
+                "early_stop": null
+            }
+        },
+        {
+            "name": "meth_standalone_template_grid_index",
+            "type": "method",
+            "spec": {
+                "scheduling": "template",
+                "kind": "standalone",
+                "method_name": "grid_index",
+                "cost_model": null,
+                "optimizer": null,
+                "search_policy": null,
+                "sampler": null,
+                "filter": null
+            },
+            "settings": {}
+        },
+        {
+            "name": "test_input_method_map",
+            "type": "input_method_map",
+            "spec": {
+                "strategy": "sequential",
+                "group_type": "tensor_program",
+                "maps": [
+                    {
+                        "input": "sh_29",
+                        "output": "t_sh_29",
+                        "method": "meth_standalone_template_grid_index"
+                    }
+                ]
+            }
+        }
+    ],
+    "task": {
+        "name": "test_task",
+        "type": "orchestrator:default",
+        "inputs": [
+            "sh_29"
+        ],
+        "outputs": [
+            "t_sh_29"
+        ],
+        "specifications": [
+            "orchestrator_default_spec",
+            "meth_standalone_template_grid_index",
+            "test_input_method_map"
+        ],
+        "configurations": [
+            "orchestrator:default.1",
+            "measurer:default.1",
+            "builder:parallel.1",
+            "runner:remote_tvm.1",
+            "evaluator:default.1",
+            "method:template:standalone:grid_index.1",
+            "strategy:sequential.1",
+            "time_profiler.1",
+            "time_profiler.2",
+            "time_profiler.3",
+            "time_profiler.4",
+            "system_monitor.1"
+        ],
+        "profilers": [
+            {
+                "type": "time_profiler",
+                "scope": "strategy",
+                "configuration": "time_profiler.1",
+                "collection": "strategy_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "method",
+                "configuration": "time_profiler.2",
+                "collection": "method_runs"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "builder",
+                "configuration": "time_profiler.3",
+                "collection": "compilations"
+            },
+            {
+                "type": "time_profiler",
+                "scope": "runner",
+                "configuration": "time_profiler.4",
+                "collection": "measurements"
+            },
+            {
+                "type": "system_monitor",
+                "scope": "strategy",
+                "configuration": "system_monitor.1",
+                "collection": "sysmons"
+            }
+        ]
+    },
+    "configurations": [
+        {
+            "entity": "orchestrator:default",
+            "name": "orchestrator:default.1",
+            "configuration": {}
+        },
+        {
+            "entity": "measurer:default",
+            "name": "measurer:default.1",
+            "configuration": {
+                "target": "cuda",
+                "target_host": "llvm",
+                "devices": [
+                    "localmachine:2080.0",
+                    "localmachine:2080.1",
+                    "localmachine:2080.2",
+                    "localmachine:2080.3"
+                ],
+                "nvidia_mps_devices": []
+            }
+        },
+        {
+            "entity": "builder:parallel",
+            "name": "builder:parallel.1",
+            "configuration": {
+                "timeout": 30,
+                "n_parallel": null
+            }
+        },
+        {
+            "entity": "runner:remote_tvm",
+            "name": "runner:remote_tvm.1",
+            "configuration": {
+                "cooldown_interval": 0.1,
+                "timeout": 3,
+                "n_parallel": 1,
+                "rpc_host": "0.0.0.0",
+                "rpc_port": 9000,
+                "rpc_port_end": 9099
+            }
+        },
+        {
+            "entity": "evaluator:default",
+            "name": "evaluator:default.1",
+            "configuration": {
+                "num_avg_runs": 20,
+                "num_measure_repeat": 3,
+                "min_repeat_ms": 100,
+                "enable_cpu_cache_flush": false
+            }
+        },
+        {
+            "entity": "method:template:standalone:grid_index",
+            "name": "method:template:standalone:grid_index.1",
+            "configuration": null
+        },
+        {
+            "entity": "strategy:sequential",
+            "name": "strategy:sequential.1",
+            "configuration": {}
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.1",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.2",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.3",
+            "configuration": null
+        },
+        {
+            "entity": "time_profiler",
+            "name": "time_profiler.4",
+            "configuration": null
+        },
+        {
+            "entity": "system_monitor",
+            "name": "system_monitor.1",
+            "configuration": {
+                "gpus": [],
+                "poll_interval": 1,
+                "metrics": {
+                    "host_cpu_freq": true,
+                    "host_cpu_util_user": true,
+                    "host_cpu_util_nice": true,
+                    "host_cpu_util_system": true,
+                    "host_cpu_util_idle": true,
+                    "host_cpu_util_iowait": true,
+                    "host_cpu_util_irq": true,
+                    "host_cpu_util_softirq": true,
+                    "host_cpu_util_perc": true,
+                    "host_mem_prc": true,
+                    "gpu_mem_free": false,
+                    "gpu_mem_used": false,
+                    "gpu_mem_total": false,
+                    "gpu_util": false,
+                    "gpu_mem_util": false,
+                    "gpu_power": false,
+                    "gpu_clock_sm": false,
+                    "gpu_clock_mem": false
+                }
+            }
+        }
+    ]
+}
